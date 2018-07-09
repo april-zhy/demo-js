@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+
+    <link rel="stylesheet" type="text/css" href="./mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="./mui.picker.min.css" />
+</head>
+
+<body>
+
+    <header class="mui-bar mui-bar-nav">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">
+            <span style="color: #202020; font-size: 20px;">年月日级联</span>
+        </a>
+    </header>
+    <div class="mui-content">
+        <div id="showAddress"> 省、市、区</div>
+    </div>
+
+    <script src="./mui.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./mui.picker.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./mui.poppicker.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./city.data-3.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        mui.plusReady(function () {
+        document.getElementById('showAddress').addEventListener('tap', function () {
+
+            var adressStr = '';
+            //显示几层，我们要显示省、市、区，所以我们这里写三层，如果不写默认是一层
+            var addressPicker = new mui.PopPicker({
+                layer: 3
+            });
+            addressPicker.setData(cityData3);
+            //city.data-3.js中的数据
+
+            addressPicker.show(function (selectItems) {
+                //将选择的省、市、区显示到屏幕上
+                for (var i = 0; i < selectItems.length; i++) {
+                    adressStr += selectItems[i].text;
+                }
+                document.getElementById('showAddress').innerHTML = adressStr;
+            });
+        })
+        });
+    </script>
+</body>
+
+</html>
