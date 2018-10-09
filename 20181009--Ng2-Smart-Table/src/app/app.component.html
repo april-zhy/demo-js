@@ -1,0 +1,15 @@
+<div style="text-align:center">
+  <h1> Welcome to {{ title }}! </h1>
+</div>
+
+<ul>
+  <li>
+    <h2><a [routerLink]="['/local']" routerLinkActive="active">LocalSource</a></h2>
+  </li>
+  <li>
+    <h2><a [routerLink]="['/server']" routerLinkActive="active">ServerSource</a></h2>
+  </li>
+</ul>
+<div class="table-box">
+  <router-outlet></router-outlet>
+</div>
