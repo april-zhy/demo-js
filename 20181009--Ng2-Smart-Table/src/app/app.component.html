@@ -1,7 +1,14 @@
+<div>
+  <select #langSelect (change)="onLangChange(langSelect.value)">
+    <option value="zh">zh</option>
+    <option value="en">en</option>
+  </select>
+</div>
 <div style="text-align:center">
   <h1> Welcome to {{ title }}! </h1>
+  <div>{{'TEST_INFO' | translate}}</div>
+  <div>{{'WELCOME' | translate}}</div>
 </div>
-
 <ul>
   <li>
     <h2><a [routerLink]="['/local']" routerLinkActive="active">LocalSource</a></h2>

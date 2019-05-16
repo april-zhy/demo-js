@@ -1,0 +1,11 @@
+{
+  "WELCOME": "Welcome !",
+  "TEST_INFO": "Test Info",
+  "TABLE": {
+    "ACTION": "Actions",
+    "ID": "ID",
+    "ALBUM": "Album",
+    "TITLE": "Title",
+    "URL": "Url"
+  }
+}

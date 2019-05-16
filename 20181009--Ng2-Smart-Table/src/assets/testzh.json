@@ -1,0 +1,11 @@
+{
+  "WELCOME": "欢迎！",
+  "TEST_INFO": "测试信息",
+  "TABLE": {
+    "ACTION": "操作",
+    "ID": "编号",
+    "ALBUM": "专辑",
+    "TITLE": "标题",
+    "URL": "网址"
+  }
+}

@@ -7,7 +7,16 @@ import { DemoLocalSourceComponent } from './demo-local-source/demo-local-source.
 import { AppRoutingModule } from './app-routing.module';
 
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { HttpClient } from '@angular/common/http';
 
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { NgoTranslateService } from './ngo-translate.service';
+
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/test', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -18,9 +27,16 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
   imports: [
     Ng2SmartTableModule,
     BrowserModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [NgoTranslateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

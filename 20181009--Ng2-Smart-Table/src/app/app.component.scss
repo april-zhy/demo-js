@@ -1,10 +1,13 @@
 $table-font-color: #606c71;
 $table-border-color: #e9ebec;
+
 :host {
   /deep/ {
     table {
       color: $table-font-color;
+
       tr {
+
         td,
         th {
           border: 1px solid $table-border-color;
