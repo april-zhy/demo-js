@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Flex 布局</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {}
+
+    body {
+      display: flex;
+      align-items: center;
+      width: 450px;
+      height: 350px;
+      border: 2px solid white;
+      background-color: #222;
+    }
+
+    body .box {
+      margin: 0 auto;
+      padding: 4px;
+      width: 120px;
+      height: 120px;
+      box-shadow:
+        inset 0 5px white,
+        inset 0 -5px #bbb,
+        inset 5px 0 #d7d7d7,
+        inset -5px 0 #d7d7d7;
+      border-radius: 10%;
+      background-color: #e7e7e7;
+    }
+
+    div span {
+      display: block;
+      margin: 4px;
+      width: 18px;
+      height: 18px;
+      background-color: #333;
+      color: white;
+      box-shadow: inset 0 3px #111, inset 0 -3px #555;
+      border-radius: 50%;
+    }
+
+    .box {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .column {
+      flex-basis: 100%;
+      justify-content: space-between;
+      display: flex;
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <div class="column">
+      <span class="item"></span>
+      <span class="item"></span>
+      <span class="item"></span>
+    </div>
+    <div class="column">
+      <span class="item"></span>
+      <span class="item"></span>
+      <span class="item"></span>
+    </div>
+    <div class="column">
+      <span class="item"></span>
+      <span class="item"></span>
+      <span class="item"></span>
+    </div>
+  </div>
+</body>
+
+</html>
