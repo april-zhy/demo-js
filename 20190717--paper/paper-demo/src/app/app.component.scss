@@ -1,0 +1,14 @@
+html,
+body,
+div {
+  padding: 0;
+  margin: 0;
+}
+
+div {
+  canvas {
+    width: 800px;
+    height: 640px;
+    border: 1px solid blue;
+  }
+}
