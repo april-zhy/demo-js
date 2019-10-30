@@ -1,0 +1,63 @@
+@import "~taro-ui/dist/style/components/toast.scss";
+@import "~taro-ui/dist/style/components/icon.scss";
+
+
+page {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+.page {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+.container {
+  padding: 3% 3% 0% 3%;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  box-sizing: border-box;
+}
+
+.container-m {
+  padding: 3% 3% 0% 3%;
+  width: 100%;
+  height: 82%;
+  background-color: white;
+  box-sizing: border-box;
+  border: 1px solid red;
+}
+
+.scroll {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.scroll-x {
+  width: 100%;
+  height: 70rpx;
+  display: flex;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+
+
+.notice {
+  padding-left: 8rpx;
+  font-size: 26rpx;
+  color: red;
+}
+
+.noData {
+  padding: 30rpx;
+  text-align: center;
+  color: #bbb;
+  font-size: 30rpx;
+}
