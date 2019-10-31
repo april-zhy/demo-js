@@ -2,9 +2,10 @@ import './books.scss'
 import Taro, { Component, Config } from '@tarojs/taro';
 import { View, Text, Image, ScrollView } from '@tarojs/components';
 
-import { Scroll, Toast } from '../../../components';
-import { ZToast } from '../../../components/toast/z-toast';
-import { BookResponse, BookTypeResponse } from 'src/@types';
+import Toast from '@components/toast/toast';
+import Scroll from '@components/scroll/scroll';
+import { ZToast } from '@components/toast/z-toast';
+import { BookResponse, BookTypeResponse } from '@types';
 import * as bookService from '../../../services/service/book.service';
 
 

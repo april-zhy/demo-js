@@ -2,8 +2,8 @@ import './index.scss'
 import { View, Text } from '@tarojs/components';
 import Taro, { Component, Config } from '@tarojs/taro';
 import * as loginService from '../../services';
-import { Toast } from '../../components';
-import { ZToast } from '../../components/toast/z-toast';
+import Toast from '@components/toast/toast';
+import { ZToast } from '@components/toast/z-toast';
 
 class Index extends Component {
 

@@ -1,7 +1,7 @@
 import './index.scss'
 import Taro, { Component } from '@tarojs/taro';
-import { View, ScrollView, Image } from '@tarojs/components';
-import UserInfo from '../../components/userInfo/userInfo';
+import { View, ScrollView } from '@tarojs/components';
+import UserInfo from '@components/userInfo/userInfo';
 import bookImg from '../../images/apps/btn_book.png';
 import labImg from '../../images/apps/btn_lab.png';
 import visitorImg from '../../images/apps/btn_visitor.png';
