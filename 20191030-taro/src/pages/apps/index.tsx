@@ -6,6 +6,7 @@ import bookImg from '../../images/apps/btn_book.png';
 import labImg from '../../images/apps/btn_lab.png';
 import visitorImg from '../../images/apps/btn_visitor.png';
 import photoImg from '../../images/apps/btn_photo.png';
+import { AtGrid } from 'taro-ui';
 
 
 class Index extends Component {
@@ -13,36 +14,60 @@ class Index extends Component {
   state = {
     appList: [
       {
-        img: bookImg,
-        title: '书籍管理',
+        image: bookImg,
+        value: '书籍管理',
         url: 'books/books'
       }, {
-        img: labImg,
-        title: '实验室设备管理',
+        image: labImg,
+        value: '实验室设备管理',
         url: 'books/books'
       }, {
-        img: visitorImg,
-        title: '访客登记',
+        image: visitorImg,
+        value: '访客登记',
         url: 'books/books'
       }, {
-        img: photoImg,
-        title: '摄影投稿',
+        image: bookImg,
+        value: '书籍管理',
         url: 'books/books'
       }, {
-        img: photoImg,
-        title: '摄影投稿',
+        image: labImg,
+        value: '实验室设备管理',
         url: 'books/books'
       }, {
-        img: photoImg,
-        title: '摄影投稿',
+        image: visitorImg,
+        value: '访客登记',
         url: 'books/books'
       }, {
-        img: photoImg,
-        title: '摄影投稿',
+        image: bookImg,
+        value: '书籍管理',
         url: 'books/books'
       }, {
-        img: photoImg,
-        title: '摄影投稿',
+        image: labImg,
+        value: '实验室设备管理',
+        url: 'books/books'
+      }, {
+        image: visitorImg,
+        value: '访客登记',
+        url: 'books/books'
+      }, {
+        image: photoImg,
+        value: '摄影投稿',
+        url: 'books/books'
+      }, {
+        image: photoImg,
+        value: '摄影投稿',
+        url: 'books/books'
+      }, {
+        image: photoImg,
+        value: '摄影投稿',
+        url: 'books/books'
+      }, {
+        image: photoImg,
+        value: '摄影投稿',
+        url: 'books/books'
+      }, {
+        image: photoImg,
+        value: '摄影投稿',
         url: 'books/books'
       }
     ]
@@ -50,10 +75,12 @@ class Index extends Component {
 
   componentWillMount() {
     // 检测是否登录
+    // Taro.navigateTo({ url: 'books/books' });
+
   }
 
-  appClick(url) {
-    Taro.navigateTo({ url })
+  appClick(appItem) {
+    Taro.navigateTo({ url: appItem.url });
   }
 
   render() {
@@ -64,14 +91,7 @@ class Index extends Component {
         <View className='container-m'>
           <View className="appList">
             <ScrollView scrollY className='scroll'>
-              {
-                appList.map((app) => {
-                  return (<View className='appItem' onClick={this.appClick.bind(this, app.url)}>
-                    <Image className='appIcon' src={app.img}></Image>
-                    <View className='appName'>{app.title}</View>
-                  </View>)
-                })
-              }
+              <AtGrid className='myGrid' data={appList} onClick={this.appClick.bind(this)}></AtGrid>
             </ScrollView>
           </View>
         </View>
