@@ -1,27 +1,74 @@
 .header {
   width: 100%;
-  height: 8%;
-  border: 1px solid blue;
+  height: 10%;
   box-sizing: border-box;
-}
 
-.active {
-  color: aquamarine;
-}
+  .subHeader {
+    display: flex;
+    width: 100%;
+    height: 50%;
+    box-sizing: border-box;
 
-.scroll-x {
-  width: 100%;
-  height: 70rpx;
-  display: flex;
-  white-space: nowrap;
-  box-sizing: border-box;
-  border: 1px solid black;
+    .search {
+      margin: 0;
+      display: inline-block;
+      width: 80%;
+      height: 100%;
+      line-height: 1.2;
+      color: #aaa;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 5rpx;
+
+      .searchIcon {
+        width: 12%;
+        font-size: 46rpx;
+        color: #aaa;
+      }
+    }
+
+    .at-icon,
+    .z-icon {
+      margin: 0;
+      display: inline-block;
+      padding: 5rpx 10rpx;
+      width: 10%;
+      color: #888;
+      font-size: 52rpx;
+      box-sizing: border-box;
+    }
+  }
+
+  .scroll-x {
+    display: flex;
+    width: 100%;
+    height: 50%;
+    white-space: nowrap;
+    box-sizing: border-box;
+
+    .typeItem {
+      display: inline-block;
+      padding: 0 15rpx;
+      height: 100%;
+      color: #888;
+      box-sizing: border-box;
+
+      .typeName {
+        line-height: 2;
+        font-size: 30rpx;
+      }
+    }
+
+    .typeItem.active {
+      color: aquamarine;
+    }
+
+  }
 }
 
 .content {
   width: 100%;
-  height: 92%;
-  border: 1px solid red;
+  height: 90%;
   box-sizing: border-box;
 }
 
@@ -34,7 +81,6 @@
   box-sizing: border-box;
 }
 
-
 .bookItemImg,
 .noCover {
   display: block;
@@ -45,21 +91,11 @@
   box-shadow: 3px 5px 5px #888;
 }
 
-.empty {
-  position: absolute;
-  top: 5rpx;
-  left: 5rpx;
-  color: white;
-  font-size: 22rpx;
-  background-color: red;
-}
-
-
 .noCover {
+  color: #888;
   text-align: center;
   line-height: 280rpx;
 }
-
 
 .bookItemName {
   display: block;
@@ -68,5 +104,6 @@
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
+  color: #888;
   text-overflow: ellipsis;
 }
