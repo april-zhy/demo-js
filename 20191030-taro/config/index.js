@@ -1,3 +1,5 @@
+const path = require('path');
+
 const config = {
   projectName: '20191030-taro',
   date: '2019-10-30',
@@ -9,6 +11,10 @@ const config = {
   },
   sourceRoot: 'src',
   outputRoot: 'dist',
+  alias: {
+    '@components': path.resolve(__dirname, '..', 'src/components'),
+    '@types': path.resolve(__dirname, '..', 'src/@types')
+  },
   plugins: {
     babel: {
       sourceMap: true,
@@ -24,14 +30,12 @@ const config = {
       ]
     }
   },
-  defineConstants: {
-  },
+  defineConstants: {},
   copy: {
-    patterns: [
-    ],
-    options: {
-    }
+    patterns: [],
+    options: {}
   },
+
   weapp: {
     module: {
       postcss: {

@@ -24,9 +24,8 @@
       "global.d.ts"
     ],
     "paths": {
-      "components": [
-        "./src/components"
-      ],
+      "@components/*": ["./src/components/*"],
+      "@types": ["./src/@types"],
     }
   },
   "exclude": [
