@@ -1,7 +1,5 @@
 (function () {
-  /**
-   * UI控制
-   */
+
   var UI = function () {
     // 预备界面
     this.gameCover = my.DOM.get('gameCover');
@@ -11,11 +9,9 @@
     this.gameOver = my.DOM.get('gameOver');
     // 分数
     this.number = my.DOM.get('number');
-    /**
-     * 得分
-     */
+    // 得分
     this.score = 0;
-    //存在矩阵,表示在那个坑存在地鼠
+    //存在矩阵,1 表示在那个坑存在地鼠
     this.existMatrix;
     this.hammer;
     this.mouse0;
@@ -50,8 +46,7 @@
    * 初始化声音控制按钮
    */
   UI.prototype.__initBtnSound = function () {
-    var btnSound = my.DOM.get('btnSound'),
-      UI = this;
+    var btnSound = my.DOM.get('btnSound');
     btnSound.onclick = my.delegate(function () {
       if (my.DOM.hasClass(btnSound, 'disabled')) {
         my.DOM.removeClass(btnSound, 'disabled');
@@ -68,8 +63,8 @@
    * 初始化开始游戏按钮
    */
   UI.prototype.__initBtnPlay = function () {
-    var btnPlay = my.DOM.get('btnPlay'),
-      self = this;
+    var btnPlay = my.DOM.get('btnPlay');
+    const self = this;
     btnPlay.onclick = function () {
       self.onplay();
     }
@@ -79,8 +74,7 @@
    * 初始化暂停按钮
    */
   UI.prototype.__initBtnPause = function () {
-    var btnPause = my.DOM.get('btnPause'),
-      UI = this;
+    const btnPause = my.DOM.get('btnPause');
     btnPause.onclick = my.delegate(function () {
       if (my.DOM.hasClass(btnPause, 'disabled')) {
         my.DOM.removeClass(btnPause, 'disabled');
@@ -96,8 +90,8 @@
    * 初始化准备按钮
    */
   UI.prototype.__initBtnRetry = function () {
-    var btnRetry = my.DOM.get('btnRetry'),
-      self = this;
+    const btnRetry = my.DOM.get('btnRetry');
+    const self = this;
     btnRetry.onclick = function () {
       self.onretry();
     }
@@ -172,15 +166,14 @@
     canvas.onmouseup = function (e) {
       self.mousePress = false;
       var even = window.event || e;
-      self.__pengzhuang(self, even.clientX - 300, even.clientY - 40);
+      self.__collisionDetection(self, even.clientX - 300, even.clientY - 40);
     }
   }
 
   /**
    * 锤子与地鼠的碰撞检测
    */
-  UI.prototype.__pengzhuang = function (self, x, y) {
-
+  UI.prototype.__collisionDetection = function (self, x, y) {
     outerloop: for (i = 0; i < 3; i++) {
       for (j = 0; j < 3; j++) {
         if (self.existMatrix[i][j] == 1) {
@@ -214,10 +207,8 @@
     }
 
   }
-  /* 
-   *it待检测对象
-   */
 
+  //it待检测对象
   UI.prototype.__boundTest = function (self, it, x, y, i, j) {
     if (it.state == 'normal') {
       if (x > it.x && y > (it.y - 50) && x < (it.x + it.width) && y < (it.y + it.height - 50)) {
@@ -226,7 +217,6 @@
         self.star[i][j].y = it.y; //重置星星y轴位置
         Audio.play('no_hit');
         return true;
-
       }
     }
     return false;
@@ -275,7 +265,6 @@
     this.__initBtnRetry();
     this.__initBtnHelp();
     this.__initMouseEventListener();
-
   }
   /**
    * 设置分数
@@ -300,33 +289,23 @@
     }
   }
 
-  /**
-   * 切换到预备界面
-   */
+  // 切换到预备界面
   UI.prototype.toCover = function () {
     my.DOM.hide(this.gameBody);
     my.DOM.hide(this.gameOver);
     my.DOM.show(this.gameCover);
   }
-  /**
-   * 切换到游戏主体界面
-   */
+  // 切换到游戏主体界面
   UI.prototype.toBody = function () {
     my.DOM.hide(this.gameOver);
     my.DOM.hide(this.gameCover);
     my.DOM.show(this.gameBody);
   }
-  /**
-   * 切换到游戏结束界面
-   */
+  // 切换到游戏结束界面
   UI.prototype.toOver = function () {
     my.DOM.hide(this.gameCover);
     my.DOM.hide(this.gameBody);
     my.DOM.show(this.gameOver);
   }
-
-
-
-
   window.UI = UI;
 })();

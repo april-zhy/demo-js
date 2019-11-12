@@ -55,11 +55,10 @@
    */
   function init() {
     Audio.play('game_music');
-
     // 创建游戏对象
-    var mouseHit = new MouseHit();
+    const mouseHit = new MouseHit();
     mouseHit.init();
-    var ui = mouseHit.ui;
+    const ui = mouseHit.ui;
 
     // 点击开始按钮
     ui.onplay = function () {

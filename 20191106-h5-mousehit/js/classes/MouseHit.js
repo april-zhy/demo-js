@@ -4,65 +4,36 @@
 (function () {
 
   var MouseHit = function (cfg) {
-
-    /**
-     * 锤子
-     */
     this.hammer = null;
-
-    /**
-     * 地鼠,有5种
-     */
     this.mouse0 = [];
     this.mouse1 = [];
     this.mouse2 = [];
     this.mouse3 = [];
     this.mouse4 = [];
-    /**
-     * 地鼠初始化x轴位置
-     */
-    this.mouseX = [
+    this.holeX = [
       [130, 322, 516],
       [106, 322, 522],
       [97, 322, 544]
     ];
-    /**
-     * 地鼠初始化y轴位置
-     */
-    this.mouseY = [170, 262, 362];
-    this.mouseType = [106];
-    //存在矩阵,表示在那个坑存在地鼠
+    this.holeY = [170, 262, 362];
+
+    //存在矩阵,1表示存在地鼠
     this.existMatrix = [
       [0, 0, 0],
       [0, 0, 0],
       [0, 0, 0]
     ];
-    /**
-     * 星星
-     */
+
     this.star = [];
-    /**
-     * 分数帧类
-     */
+    // 分数帧类
     this.scoreObject = [];
-
-    /**
-     * UI对象
-     */
+    // UI对象
     this.ui = null;
-
-    /**
-     * 预备时间
-     */
+    // 预备时间
     this.readyTime = 0;
-
-    /**
-     * 是否即将开始
-     */
+    // 是否即将开始
     this.isGo = false;
-    /**
-     * canvas上下文
-     */
+    //canvas上下文
     this.canvas;
     this.context;
     // 地鼠洞
@@ -76,7 +47,7 @@
     //计时数，不打算用一个新的setInterval来做 
     this.timeCaculator = 0;
     //第几关，初始是第一关
-    this.dijiguan = 1;
+    this.level = 1;
     //每关过关分数,第一默认为2000		
     this.requireScore = 2000;
     this.readyInterval;
@@ -111,30 +82,33 @@
 
   /**
    * @private
-   * 创建地鼠 
+   * 创建地鼠  每个洞穴有5种老鼠
    */
   MouseHit.prototype.__createMouse = function () {
-
     for (i = 0; i < 3; i++) {
-      var arr = [],
-        arr1 = [],
-        arr2 = [],
-        arr3 = [],
-        arr4 = [];
+      const arr = [];
+      const arr1 = [];
+      const arr2 = [];
+      const arr3 = [];
+      const arr4 = [];
       for (j = 0; j < 3; j++) {
-        var mouse0 = new Mouse(),
-          mouse1 = new Mouse(),
-          mouse2 = new Mouse(),
-          mouse3 = new Mouse(),
-          mouse4 = new Mouse();
-        mouse0.init('mouse1', this.mouseX[i][j], this.mouseY[i], 106);
-        mouse1.init('mouse2', this.mouseX[i][j], this.mouseY[i], 106);
-        mouse2.init('mouse3', this.mouseX[i][j], this.mouseY[i], 106);
-        mouse3.init('mouse4', this.mouseX[i][j], this.mouseY[i] - 12, 120);
-        mouse4.init('mouse5', this.mouseX[i][j], this.mouseY[i] - 25, 130);
+        const mouse0 = new Mouse();
+        const mouse1 = new Mouse();
+        const mouse2 = new Mouse();
+        const mouse3 = new Mouse();
+        const mouse4 = new Mouse();
+        mouse0.init('mouse1', this.holeX[i][j], this.holeY[i], 106);
+        mouse1.init('mouse2', this.holeX[i][j], this.holeY[i], 106);
+        mouse2.init('mouse3', this.holeX[i][j], this.holeY[i], 106);
+        mouse3.init('mouse4', this.holeX[i][j], this.holeY[i] - 12, 120);
+        mouse4.init('mouse5', this.holeX[i][j], this.holeY[i] - 25, 130);
         arr[j] = mouse0, arr1[j] = mouse1, arr2[j] = mouse2, arr3[j] = mouse3, arr4[j] = mouse4;
       }
-      this.mouse0[i] = arr, this.mouse1[i] = arr1, this.mouse2[i] = arr2, this.mouse3[i] = arr3, this.mouse4[i] = arr4;
+      this.mouse0[i] = arr;
+      this.mouse1[i] = arr1;
+      this.mouse2[i] = arr2;
+      this.mouse3[i] = arr3;
+      this.mouse4[i] = arr4;
     }
   }
   /**
@@ -147,18 +121,20 @@
       var arr = [];
       for (j = 0; j < 3; j++) {
         var star = new Star();
-        star.init(this.mouseX[i][j] + 10, this.mouseY[i]); // y轴不是必要的，到时碰撞时会重置
+        star.init(this.holeX[i][j] + 10, this.holeY[i]); // y轴不是必要的，到时碰撞时会重置
         arr[j] = star;
       }
       this.star[i] = arr;
     }
+    console.error(this.star);
+
   }
   /**
    * @private
    * 创建场景
    */
   MouseHit.prototype.__createScene = function () {
-    // 地鼠洞
+    // 地鼠洞 即背景图
     this.bg_hole = new my.Bitmap({
       image: my.ImageManager.get('bg_hole'),
       width: 750,
@@ -177,13 +153,11 @@
    * 创建UI对象
    */
   MouseHit.prototype.__createUI = function () {
-    var ui = new UI(),
-      MouseHit = this;
+    const ui = new UI();
+    const MouseHit = this;
     ui.init();
-
     ui.onretry = function () {
       //Audio.play('ogg_background');
-
       this.toBody();
       MouseHit.stateInit();
     }
@@ -197,7 +171,6 @@
     this.ui.star = this.star;
     this.ui.scoreObject = this.scoreObject;
     this.ui.existMatrix = this.existMatrix;
-
   }
   /**
    * 初始化游戏
@@ -222,7 +195,6 @@
 
     self.__drawReadyScreen(self);
     switch (index) {
-
       case 0:
         self.context.drawImage(self.startNumber, 449, 296, 51, 87, 360, 300, 51, 87);
         Audio.play('begin_music');
@@ -289,14 +261,14 @@
         my.DOM.get('currentScore').innerHTML = ~~self.ui.score;
         my.DOM.get('requireScore').innerHTML = ~~self.requireScore;
         my.DOM.show(my.DOM.get('nextLoading')); //下一关界面放这里
-        self.dijiguan++;
+        self.level++;
         self.ui.score = 0;
         self.ui.setNumber(0);
         Audio.play('game_pass');
         //重新设置		
       } else { //不过关
         self.requireScore = 2000;
-        self.dijiguan = 1;
+        self.level = 1;
         self.ui.toOver(); //失败界面
         my.DOM.get('score').innerHTML = "你的得分：" + ~~self.ui.score;
         self.ui.score = 0;
@@ -385,6 +357,5 @@
       index++;
     }, 1000);
   }
-
   window.MouseHit = MouseHit;
 })();

@@ -10,7 +10,7 @@
       */
      this.img = null;
      /**
-      * 帧列表
+      * 帧列表  ，每帧的位置
       * @format {
       *     x: 0,
       *     y: 0,
@@ -46,7 +46,8 @@
       * @private
       * 当前帧已播放次数
       */
-     this.currentPlayeTimes = 0; //在Animation内部自定义这样，是为了让对象自控制自己的帧变换，间接影响这个数值快慢就是刷新canvas速率的快慢
+     this.currentPlayTimes = 0;
+     //在Animation内部自定义这样，是为了让对象自控制自己的帧变换，间接影响这个数值快慢就是刷新canvas速率的快慢
      /**
       * 多少次界面刷新更换一帧
       */
@@ -71,23 +72,22 @@
     * normal状态更新
     */
    Animation.prototype.update = function () {
-     if (this.currentPlayeTimes >= this.maxPlayTimes) {
+     if (this.currentPlayTimes >= this.maxPlayTimes) {
        if (this.currentFrameIndex >= this.frames.length - 2) {
          this.currentFrameIndex = 0;
        } else {
          this.currentFrameIndex++;
        }
        this.currentFrame = this.frames[this.currentFrameIndex];
-       this.currentPlayeTimes = 0;
+       this.currentPlayTimes = 0;
      } else {
-       this.currentPlayeTimes++;
+       this.currentPlayTimes++;
      }
    }
 
    Animation.prototype.draw = function (ct, x, y, w, h) {
-     var f = this.currentFrame;
+     var f = this.currentFrame; // 当前帧的x,y，即改变雪碧图的切割位置
      ct.drawImage(this.img, f.x, f.y, w, h, x, y, w, h);
    }
-
    my.Animation = Animation;
  })();

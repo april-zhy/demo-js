@@ -21,11 +21,10 @@
     this.state = 'hide';
     this.up = 1; //向上飘
     this.duration = 3; //刷新一次向上飘的像素
-    this.disppearDuration = 56; //'dead' 状态下消失计数
+    this.disappearDuration = 56; //'dead' 状态下消失计数
     this.anim;
-
-
   }
+
   Mouse.prototype.init = function (mouseName, x, y, finalHeight) {
     var anim = new my.Animation();
     anim.init('mouse', getMouseFrames, mouseName);
@@ -37,12 +36,13 @@
     this.height = 0;
   }
 
-  Mouse.prototype.reprepare = function (self, existMatrix, i, j) { //传入i,j和存在矩阵，为了重置
+  Mouse.prototype.rePrepare = function (self, existMatrix, i, j) {
+    //传入i,j和存在矩阵，重置为0
     self.state = 'hide';
     self.up = 1;
     self.height = 0;
     self.y = this.finalY + this.finalHeight;
-    self.disppearDuration = 56;
+    self.disappearDuration = 56;
     existMatrix[i][j] = 0;
   }
 
@@ -60,7 +60,7 @@
         this.height -= this.duration;
       }
       if (this.height < 0) {
-        this.reprepare(this, existMatrix, i, j);
+        this.rePrepare(this, existMatrix, i, j);
       } else {
         self.anim.update();
         self.anim.draw(context, this.x, this.y, this.width, this.height);
@@ -68,9 +68,9 @@
     } else if (this.state == 'dead') {
       self.anim.currentFrame = self.anim.frames[3];
       self.anim.draw(context, this.x, this.y, this.width, this.height);
-      self.disppearDuration--;
-      if (self.disppearDuration == 0) {
-        self.reprepare(self, existMatrix, i, j);
+      self.disappearDuration--;
+      if (self.disappearDuration == 0) {
+        self.rePrepare(self, existMatrix, i, j);
       }
     }
   }
